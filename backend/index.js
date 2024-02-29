@@ -5,6 +5,9 @@ const Sum = require('./utils');
 const app = express();
 const port = process.env.PORT || 3001;
 console.log(Sum(102, 106));
+
+
+
 const mongoUri = process.env.mongoUri || 'mongodb://admin:admin@localhost:27017/admin'
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
@@ -28,7 +31,7 @@ const Article = mongoose.model('Article', articleSchema);
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.get('/api/article', async (req, res) => {
-  const article = await Article.findOne({id: id});
+  const article = await Article.findOne({ id: id });
   res.json(article)
 });
 
@@ -38,11 +41,11 @@ app.post('/api/article', async (req, res) => {
 
   try {
     const article = await Article.findOne({ id: id });
-    if(article) return res.json(article)
+    if (article) return res.json(article)
     const createArticle = await Article.create(
-      {id, title, content}    
+      { id, title, content }
     );
-    
+
     return res.json(createArticle);
   } catch (error) {
     console.error('Failed to update article:', error);
