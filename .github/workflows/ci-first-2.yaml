@@ -1,4 +1,5 @@
-name: Start learn 2
+name: Start #name action
+run-name: Start hello run name #run name
 on:
   push:
     branches:
@@ -7,6 +8,18 @@ on:
 jobs:
   hello:
     runs-on: ubuntu-latest
+
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
       - name: Step heello
-        run: echo "Hello world 2"
+        run: |
+          ls
+          echo "hello"
+          node -v
